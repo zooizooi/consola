@@ -19,8 +19,5 @@
     "typescript": "^5.2.2",
     "vite": "^5.1.4",
     "vite-plugin-dts": "^3.7.3"
-  },
-  "dependencies": {
-    "@zooizooi/eslint-config": "npm:@ZOOIZOOI/eslint-config@^1.0.1"
   }
 }
