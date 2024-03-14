@@ -15,11 +15,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-          # registry-url: https://npm.pkg.github.com/
       - name: Authenticate with GitHub Packages
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.AUTH_TOKEN_PACKAGE_READ }}" >> ~/.npmrc
       - run: npm ci
       - run: npm run build
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
