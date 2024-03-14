@@ -1,2 +1,2 @@
-import config from '@ZOOIZOOI/eslint-config';
+import config from '@zooizooi/eslint-config';
 export default config.typescript;
