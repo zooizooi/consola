@@ -7,15 +7,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
+    # permissions:
+    #   packages: write
+    #   contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-          registry-url: https://npm.pkg.github.com/
+          # registry-url: https://npm.pkg.github.com/
       - name: Authenticate with GitHub Packages
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.AUTH_TOKEN_PACKAGE_READ }}" >> ~/.npmrc
       - run: npm ci
