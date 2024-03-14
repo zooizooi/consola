@@ -18,7 +18,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
       - name: Authenticate with GitHub Packages
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.AUTH_TOKEN_PACKAGE_READ }}" >> ~/.npmrc
-      - run: npm ci
+      - run: npm install
       - run: npm run build
       - run: npm publish
         env:
