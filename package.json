@@ -1,8 +1,10 @@
 {
-  "name": "consola",
+  "name": "@ZOOIZOOI/consola",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -15,10 +17,10 @@
     "postcss": "^8.4.35",
     "sass": "^1.71.1",
     "typescript": "^5.2.2",
-    "vite": "^5.1.4"
+    "vite": "^5.1.4",
+    "vite-plugin-dts": "^3.7.3"
   },
   "dependencies": {
-    "@zooizooi/eslint-config": "npm:@ZOOIZOOI/eslint-config@^1.0.1",
-    "vite-plugin-dts": "^3.7.3"
+    "@zooizooi/eslint-config": "npm:@ZOOIZOOI/eslint-config@^1.0.1"
   }
 }
