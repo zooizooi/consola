@@ -1,0 +1,24 @@
+{
+  "name": "consola",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@rollup/plugin-replace": "^5.0.5",
+    "@ZOOIZOOI/eslint-config": "^1.0.0",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35",
+    "sass": "^1.71.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4"
+  },
+  "dependencies": {
+    "@zooizooi/eslint-config": "npm:@ZOOIZOOI/eslint-config@^1.0.1",
+    "vite-plugin-dts": "^3.7.3"
+  }
+}

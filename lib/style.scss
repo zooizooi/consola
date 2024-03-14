@@ -1,0 +1,215 @@
+$yellow: #b2990c;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(81, 2, 2);
+}
+
+.button {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.window {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: Arial;
+    font-size: 12px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.header {
+    position: relative;
+    
+    background-color: red;
+
+    color: $yellow;
+    background-color: #263146;   
+    border: 1px solid #3d495e;
+    padding: 3px;
+}
+
+.body {
+    border-right: 1px solid #131823;
+    border-bottom: 1px solid #131823;
+    border-left: 1px solid #131823;
+}
+
+.button-minimize {
+    position: absolute;
+
+    right: 30px;
+
+    width: 20px;
+    height: 20px;
+
+    &:active {
+        .icon {
+            transform: translate(1px, 1px);
+        }
+    }
+}
+
+.icon-minimize {
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+    left: 0;
+    
+    margin: 0 auto;
+
+    width: 60%;
+    height: 3px;
+
+    background: $yellow;
+}
+
+.icon-maximize {
+    display: none;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid $yellow;
+    border-right: 1px solid $yellow;
+    border-bottom: 1px solid $yellow;
+    border-left: 1px solid $yellow;
+}
+
+.button-close {
+    position: absolute;
+
+    right: 3px;
+
+    width: 15px;
+    height: 15px;
+
+    &:active {
+        .icon {
+            transform: translate(1px, 1px);
+
+            .line {
+                background-color: yellow;
+            }
+        }
+    }
+}
+
+.button-close .icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    margin: auto;
+
+    width: 80%;
+    height: 80%;
+}
+
+.button-close .icon .line {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    margin: auto;
+
+    width: 100%;
+    height: 2px;
+
+    background-color: $yellow;
+}
+
+.button-close .icon .line.line1 {
+    transform: rotate(45deg);
+}
+
+.button-close .icon .line.line2 {
+    transform: rotate(-45deg);
+}
+
+.output {
+    color: white;
+    list-style: none;
+    padding: 1px;
+    margin: 0;
+    overflow-y: scroll;
+    scrollbar-color: #141a25 black;
+    padding-bottom: 15px;
+}
+
+.input-container {
+    position: absolute;
+    left: 0;
+    bottom: 20px;
+    width: 100%;
+    color: white;
+    padding-left: 10px;
+}
+
+.input-container .pointer {
+    position: absolute;
+    left: 1px;
+    top: 0;
+}
+
+.input-container .input {
+    width: 100%;
+    background-color: transparent;
+    outline: 0;
+    color: white;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 12px;
+}
+
+.footer {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    border-top: 1px solid black;
+}
+
+.button-resize {
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+    width: 20px;
+    height: 20px;
+
+    .icon {
+        position: absolute;
+        right: 1px;
+        bottom: 1px;
+
+        overflow: hidden;
+
+        width: 70%;
+        height: 70%;
+
+        .lines {
+            width: 120%;
+            height: 100%;
+
+            transform: rotate(135deg);
+        }
+    }
+
+    .line {
+        display: block;
+        width: 100%;
+        height: 1px;
+        background-color: white;
+        margin-bottom: 1px;
+    }
+}
