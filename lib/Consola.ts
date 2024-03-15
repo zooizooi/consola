@@ -2,7 +2,7 @@ import Window from './Window';
 
 type Callback = () => void;
 interface Command {
-    type: string, 
+    type: string,
     description?: string
 }
 
@@ -15,7 +15,6 @@ export default class Consola {
         this.bindHandlers();
         this.setupEventListeners();
         this.addCoreCommands();
-        this.window.show();
     }
 
     public addCommand(type: string, descriptionOrCallback: string | Callback, callback: Callback) {
@@ -35,6 +34,10 @@ export default class Consola {
 
     public showMessage(message: string) {
         this.window.showMessage(message);
+    }
+
+    public show() {
+        this.window.show();
     }
 
     private addCoreCommands() {

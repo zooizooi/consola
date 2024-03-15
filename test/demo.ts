@@ -4,6 +4,7 @@ import Consola from '../lib/Consola';
 console.log(Consola);
 
 const consola = new Consola();
+consola.show();
 
 function noclip() {
     consola.showMessage('no clip enabled');
