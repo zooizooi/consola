@@ -184,6 +184,19 @@ export default class Window extends EventDispatcher {
         this.references.output.scrollTop = this.references.output.scrollHeight;
     }
 
+    private updateDimensions(x: number, y: number) {
+        this.isCustomSize = true;
+
+        const deltaX = this.buttonResizePosition.x - x;
+        const deltaY = this.buttonResizePosition.y - y;
+
+        this.buttonResizePosition.x = x;
+        this.buttonResizePosition.y = y;
+
+        this.dimensions.width -= deltaX;
+        this.dimensions.height -= deltaY;
+    }
+
     private updateWindowDimensions() {
         this.window.style.width = `${this.dimensions.width}px`;
         this.references.output.style.height = `${this.dimensions.height}px`;
@@ -207,23 +220,8 @@ export default class Window extends EventDispatcher {
     }
 
     private windowMouseMoveHandler(event: MouseEvent) {
-
-
         if (this.buttonResizeIsMouseDown) {
-            this.isCustomSize = true;
-
-            const currentX = event.clientX;
-            const currentY = event.clientY;
-
-            const deltaX = this.buttonResizePosition.x - currentX;
-            const deltaY = this.buttonResizePosition.y - currentY;
-
-            this.buttonResizePosition.x = currentX;
-            this.buttonResizePosition.y = currentY;
-
-            this.dimensions.width -= deltaX;
-            this.dimensions.height -= deltaY;
-
+            this.updateDimensions(event.clientX, event.clientY);
             this.updateWindowDimensions();
         }
     }

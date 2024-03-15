@@ -40,11 +40,6 @@ export default class Consola {
         this.window.show();
     }
 
-    private addCoreCommands() {
-        this.addCommand('cmdlist', 'Show this list :)', this.commandCmdlistHandler);
-        this.addCommand('clear', 'Empty console', this.commandClearHandler);
-    }
-
     private bindHandlers() {
         this.keydownHandler = this.keydownHandler.bind(this);
         this.commandCmdlistHandler = this.commandCmdlistHandler.bind(this);
@@ -53,6 +48,11 @@ export default class Consola {
 
     private setupEventListeners() {
         document.body.addEventListener('keydown', this.keydownHandler);
+    }
+
+    private addCoreCommands() {
+        this.addCommand('cmdlist', 'Show this list :)', this.commandCmdlistHandler);
+        this.addCommand('clear', 'Empty console', this.commandClearHandler);
     }
 
     private listCommands() {
