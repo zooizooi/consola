@@ -16,7 +16,7 @@ pnpm add @zooizooi/consola
 ### Use
 ```js
 // Import
-import Conola from '@zooizooi/consola';
+import Consola from '@zooizooi/consola';
 
 // Init
 const consola = new Consola();
