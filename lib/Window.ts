@@ -1,7 +1,7 @@
 import EventDispatcher from './EventDispatcher';
 
 const template = `
-    <div class="window">
+    <div class="consola-window">
         <div class="header">
             <span class="title">ZOOIZOOI Console</span>
             <button class="button button-minimize" ref="buttonMinimize">
@@ -110,7 +110,7 @@ export default class Window extends EventDispatcher {
     private parseTemplate(template: string): HTMLElement {
         const parser = new DOMParser();
         const parsed = parser.parseFromString(template, 'text/html');
-        return parsed.querySelector<HTMLElement>('.window')!;
+        return parsed.querySelector<HTMLElement>('.consola-window')!;
     }
 
     private parseReferences(element: Element) {
@@ -202,7 +202,7 @@ export default class Window extends EventDispatcher {
     }
 
     private windowMouseMoveHandler(event: MouseEvent) {
-        
+
 
         if (this.buttonResizeIsMouseDown) {
             this.isCustomSize = true;
@@ -239,7 +239,7 @@ export default class Window extends EventDispatcher {
 function traverseDOM(element: Element | ChildNode, callback: any) {
     // Call the callback function for the current element
     callback(element);
-    
+
     // Traverse child nodes recursively
     const children = element.childNodes;
     for (let i = 0; i < children.length; i++) {

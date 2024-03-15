@@ -1,5 +1,4 @@
-// import '../lib/style.scss';
-
+import '../lib/style.scss';
 import Consola from '../lib/Consola';
 // import Consola from '../dist/index';
 console.log(Consola);
@@ -11,11 +10,11 @@ function noclip() {
 }
 
 consola.addCommand('noclip', 'fly through walls!', noclip);
- 
-/** 
+
+/**
  * Commands
  * https://www.mohaaaa.co.uk/AAAAMOHAA/content/cvars-commands-list
- * 
+ *
  * kill
  * fps "1|0"
  * cl_greenfps "1|0"
@@ -23,7 +22,7 @@ consola.addCommand('noclip', 'fly through walls!', noclip);
  * restart
  * quit
  * cmdlist
- * 
+ *
  * consola.registerCommand('noclip', 'description', callback)
 */
 
