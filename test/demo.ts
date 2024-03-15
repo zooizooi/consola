@@ -1,7 +1,6 @@
 import '../lib/style.scss';
 import Consola from '../lib/Consola';
 // import Consola from '../dist/index';
-console.log(Consola);
 
 const consola = new Consola();
 consola.show();
@@ -23,8 +22,6 @@ consola.addCommand('noclip', 'Fly through walls!', noclip);
  * restart
  * quit
  * cmdlist
- *
- * consola.registerCommand('noclip', 'description', callback)
 */
 
 /**
