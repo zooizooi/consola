@@ -1,7 +1,7 @@
 // import '../lib/style.scss';
 
-// import Consola from '../lib/Consola';
-import Consola from '../dist/index';
+import Consola from '../lib/Consola';
+// import Consola from '../dist/index';
 console.log(Consola);
 
 const consola = new Consola();

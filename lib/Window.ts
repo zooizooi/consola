@@ -107,9 +107,10 @@ export default class Window extends EventDispatcher {
         document.head.appendChild(style);
     }
 
-    private parseTemplate(template: string) {
+    private parseTemplate(template: string): HTMLElement {
         const parser = new DOMParser();
-        return parser.parseFromString(template, 'text/html').body.firstElementChild;
+        const parsed = parser.parseFromString(template, 'text/html');
+        return parsed.querySelector<HTMLElement>('.window')!;
     }
 
     private parseReferences(element: Element) {
@@ -235,7 +236,7 @@ export default class Window extends EventDispatcher {
     }
 }
 
-function traverseDOM(element: Element, callback: any) {
+function traverseDOM(element: Element | ChildNode, callback: any) {
     // Call the callback function for the current element
     callback(element);
     
