@@ -1,6 +1,8 @@
 # Consola
 In browser console for executing commands and logging output.
 
+![Consola](./consola.png)
+
 ### Setup
 ```bash
 # ni

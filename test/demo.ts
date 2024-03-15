@@ -10,7 +10,7 @@ function noclip() {
     consola.showMessage('no clip enabled');
 }
 
-consola.addCommand('noclip', 'fly through walls!', noclip);
+consola.addCommand('noclip', 'Fly through walls!', noclip);
 
 /**
  * Commands
