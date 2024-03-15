@@ -2,12 +2,15 @@
  * https://github.com/mrdoob/eventdispatcher.js/
  */
 
+type Callback = () => void;
+interface Listeners {
+    [type: string]: Callback[]
+}
+
 export default class EventDispatcher {
-    private listeners: any;
+    private listeners: Listeners = {};
 
-    public addEventListener(type: string, listener: () => void) {
-        if (this.listeners === undefined) this.listeners = {};
-
+    public addEventListener(type: string, listener: Callback) {
         if (this.listeners[type] === undefined) {
             this.listeners[type] = [];
         }
@@ -21,13 +24,13 @@ export default class EventDispatcher {
         return this.listeners[type] ? true : false;
     }
 
-    public hasEventListener(type: string, listener: () => void) {
+    public hasEventListener(type: string, listener: Callback) {
         if (this.listeners === undefined) return false;
         const listeners = this.listeners;
         return listeners[type] !== undefined && listeners[type].indexOf(listener) !== - 1;
     }
 
-    public removeEventListener(type: string, listener: () => void) {
+    public removeEventListener(type: string, listener: Callback) {
         if (this.listeners === undefined) return;
 
         const listeners = this.listeners;

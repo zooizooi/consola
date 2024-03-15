@@ -38,8 +38,12 @@ const template = `
 
 const MARGIN: number = 25;
 
+interface References {
+    [ref: string]: any
+}
+
 export default class Window extends EventDispatcher {
-    private references: any;
+    private references: References;
     private window: HTMLElement;
     private isVisible = false;
     private dimensions: { width: number, height: number } = { width: 0, height: 0 };
@@ -113,9 +117,9 @@ export default class Window extends EventDispatcher {
         return parsed.querySelector<HTMLElement>('.consola-window')!;
     }
 
-    private parseReferences(element: Element) {
-        const references: any = {};
-        traverseDOM(element, (el: Element) => {
+    private parseReferences(element: Element): References {
+        const references: References = {};
+        traverseDOM(element, (el: HTMLElement) => {
             const ref = el.getAttribute('ref');
             if (ref) references[ref] = el;
         });
