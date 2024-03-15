@@ -1,2 +1,13 @@
 import config from '@zooizooi/eslint-config';
-export default config.typescript;
+import globals from 'globals';
+
+export default [
+    ...config.typescript,
+    {
+        languageOptions: {
+            globals: {
+                ...globals.node
+            }
+        }
+    }
+];
