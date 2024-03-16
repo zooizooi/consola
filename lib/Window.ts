@@ -71,7 +71,7 @@ export default class Window extends EventDispatcher {
     public show() {
         this.window.style.display = 'block';
         this.isVisible = true;
-        this.references.input.focus();
+        setTimeout(() => this.references.input.focus(), 0); // Note: to prevent backtick showing up in the input field
     }
 
     public hide() {
