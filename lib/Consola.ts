@@ -17,10 +17,10 @@ export default class Consola {
         this.addCoreCommands();
     }
 
-    public addCommand(type: string, descriptionOrCallback: string | Callback, callback: Callback) {
+    public addCommand(type: string, descriptionOrCallback: string | Callback, callback?: Callback) {
         const command: Command = { type };
         if (typeof descriptionOrCallback === 'string') {
-            this.window.addEventListener(type, callback);
+            if (callback) this.window.addEventListener(type, callback);
             command.description = descriptionOrCallback;
         } else {
             this.window.addEventListener(type, descriptionOrCallback);
