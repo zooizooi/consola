@@ -2,7 +2,7 @@
  * https://github.com/mrdoob/eventdispatcher.js/
  */
 
-export type Callback = (value?: string | number | boolean) => void;
+export type Callback = (value?: any) => void;
 interface Listeners {
     [type: string]: Callback[]
 }
