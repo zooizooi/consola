@@ -265,11 +265,8 @@ export default class Window extends EventDispatcher {
                 event.preventDefault();
                 this.showNextCommand();
                 break;
-            case 'ArrowLeft':
-            case 'ArrowRight':
-                event.stopPropagation();
-                break;
         }
+        if (event.key !== '`') event.stopPropagation();
     }
 
     private buttonResizeMouseDownHandler(event: MouseEvent) {
