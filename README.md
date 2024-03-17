@@ -1,5 +1,5 @@
 # Consola
-In browser console for executing commands and logging output.
+In viewport console to execute commands and log output
 
 ![Consola](./consola.png)
 
