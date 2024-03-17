@@ -2,6 +2,15 @@ import '../lib/style.scss';
 import Consola from '../lib/Consola';
 // import Consola from '../dist/index';
 
+window.addEventListener('keydown', (event: KeyboardEvent) => {
+    if (event.key === 'ArrowLeft') {
+        console.log('arrowLeft');
+    }
+    if (event.key === 'ArrowRight') {
+        console.log('arrowRight');
+    }
+});
+
 const consola = new Consola();
 consola.show();
 
