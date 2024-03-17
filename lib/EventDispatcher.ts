@@ -2,7 +2,7 @@
  * https://github.com/mrdoob/eventdispatcher.js/
  */
 
-type Callback = () => void;
+export type Callback = (value?: string | number | boolean) => void;
 interface Listeners {
     [type: string]: Callback[]
 }
@@ -44,7 +44,7 @@ export default class EventDispatcher {
         }
     }
 
-    public dispatchEvent(type: string) {
+    public dispatchEvent(type: string, value?: string | number | boolean) {
         if (this.listeners === undefined) return;
 
         const listeners = this.listeners;
@@ -55,7 +55,7 @@ export default class EventDispatcher {
             const array = listenerArray.slice(0);
 
             for (let i = 0, l = array.length; i < l; i ++) {
-                array[i].call(this);
+                array[i].call(this, value);
             }
         }
     }

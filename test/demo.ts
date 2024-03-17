@@ -10,6 +10,13 @@ function noclip() {
 }
 
 consola.addCommand('noclip', 'Fly through walls!', noclip);
+consola.addCommand('speed', (value: number) => {
+    if (value) {
+        consola.showMessage(`Speed updated: ${value}`);
+    } else {
+        consola.showMessage('Add value to define speed');
+    }
+});
 
 /**
  * Commands

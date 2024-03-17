@@ -1,6 +1,6 @@
+import { Callback } from './EventDispatcher';
 import Window from './Window';
 
-type Callback = () => void;
 interface Command {
     type: string,
     description?: string

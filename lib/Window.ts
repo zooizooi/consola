@@ -43,6 +43,11 @@ interface References {
     [ref: string]: any
 }
 
+interface Command {
+    type: string,
+    value: number | undefined
+}
+
 export default class Window extends EventDispatcher {
     private references: References;
     private window: HTMLElement;
@@ -151,12 +156,22 @@ export default class Window extends EventDispatcher {
         this.references.input.value = '';
     }
 
-    private executeCommand(command: string): void {
-        this.addOutput(command, true);
-        if (this.hasEvent(command)) {
-            this.dispatchEvent(command);
+    private parseInput(input: string): Command {
+        const split = input.split(' ');
+        return {
+            type: split[0],
+            value: Number(split[1]) ? Number(split[1]) : undefined
+        };
+    }
+
+    private executeCommand(command: Command): void {
+        let output = command.type;
+        if (command.value) output += ` ${command.value}`;
+        this.addOutput(output, true);
+        if (this.hasEvent(command.type)) {
+            this.dispatchEvent(command.type, command.value);
         } else {
-            this.addOutput(`Unknown command "${command}"`);
+            this.addOutput(`Unknown command "${command.type}"`);
         }
     }
 
@@ -208,7 +223,7 @@ export default class Window extends EventDispatcher {
 
     private inputKeydownHandler(event: KeyboardEvent) {
         if (event.key === 'Enter') {
-            this.executeCommand(this.references.input.value);
+            this.executeCommand(this.parseInput(this.references.input.value));
             this.clearInput();
         }
     }
