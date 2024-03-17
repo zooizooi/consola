@@ -66,7 +66,9 @@ export default class Consola {
             return 0;
         });
         for (const command of list) {
-            commands += `${command.type}: ${command.description}<br>`;
+            let output = command.type;
+            if (command.description) output += `: ${command.description}`;
+            commands += `${output}<br>`;
         }
         this.window.showMessage(commands);
     }
