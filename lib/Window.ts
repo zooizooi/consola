@@ -57,6 +57,8 @@ export default class Window extends EventDispatcher {
     private buttonResizePosition: { x: number, y: number } = { x: 0, y: 0 };
     private isCustomSize = false;
     private isMinimized = false;
+    private commandHistory: Command[] = [];
+    private commandHistoryIndex = 0;
 
     constructor() {
         super();
@@ -152,8 +154,13 @@ export default class Window extends EventDispatcher {
         this.references.buttonClose.addEventListener('click', this.buttonCloseClickHandler);
     }
 
+    private addInput(value: string) {
+        this.references.input.value = value;
+    }
+
     private clearInput() {
         this.references.input.value = '';
+        this.commandHistoryIndex = 0;
     }
 
     private parseInput(input: string): Command {
@@ -165,6 +172,7 @@ export default class Window extends EventDispatcher {
     }
 
     private executeCommand(command: Command): void {
+        this.commandHistory.push(command);
         let output = command.type;
         if (command.value) output += ` ${command.value}`;
         this.addOutput(output, true);
@@ -172,6 +180,28 @@ export default class Window extends EventDispatcher {
             this.dispatchEvent(command.type, command.value);
         } else {
             this.addOutput(`Unknown command "${command.type}"`);
+        }
+    }
+
+    private showPreviousCommand(): void {
+        const previous = this.commandHistory[this.commandHistory.length - (this.commandHistoryIndex + 1)];
+        if (previous) {
+            this.commandHistoryIndex += 1;
+            let output = previous.type;
+            if (previous.value) output += ` ${previous.value}`;
+            this.addInput(output);
+        }
+    }
+
+    private showNextCommand(): void {
+        const next = this.commandHistory[this.commandHistory.length - (this.commandHistoryIndex - 1)];
+        if (next) {
+            this.commandHistoryIndex -= 1;
+            let output = next.type;
+            if (next.value) output += ` ${next.value}`;
+            this.addInput(output);
+        } else {
+            this.clearInput();
         }
     }
 
@@ -222,9 +252,19 @@ export default class Window extends EventDispatcher {
     }
 
     private inputKeydownHandler(event: KeyboardEvent) {
-        if (event.key === 'Enter') {
-            this.executeCommand(this.parseInput(this.references.input.value));
-            this.clearInput();
+        switch (event.key) {
+            case 'Enter':
+                this.executeCommand(this.parseInput(this.references.input.value));
+                this.clearInput();
+                break;
+            case 'ArrowUp':
+                event.preventDefault();
+                this.showPreviousCommand();
+                break;
+            case 'ArrowDown':
+                event.preventDefault();
+                this.showNextCommand();
+                break;
         }
     }
 
