@@ -14,7 +14,7 @@ export default defineConfig({
         },
         rollupOptions: {
             plugins: [
-                dts({ rollupTypes: true,  }),
+                dts({ rollupTypes: true }),
                 Replace({
                     __css__: compile('./lib/style.scss', { style: 'compressed' }).css,
                     preventAssignment: true,
