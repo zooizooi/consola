@@ -76,13 +76,13 @@ export default class Window extends EventDispatcher {
     }
 
     public show() {
-        this.window.style.display = 'block';
+        this.window.style.visibility = 'visible';
         this.isVisible = true;
         setTimeout(() => this.references.input.focus(), 0); // Note: to prevent backtick showing up in the input field
     }
 
     public hide() {
-        this.window.style.display = 'none';
+        this.window.style.visibility = 'hidden';
         this.isVisible = false;
     }
 
@@ -167,7 +167,7 @@ export default class Window extends EventDispatcher {
         const split = input.split(' ');
         return {
             type: split[0],
-            value: Number(split[1]) ? Number(split[1]) : undefined
+            value: Number(split[1]) ? Number(split[1]) : undefined,
         };
     }
 
