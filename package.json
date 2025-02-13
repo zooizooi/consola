@@ -14,11 +14,11 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@rollup/plugin-replace": "^5.0.5",
-    "@zooizooi/eslint-config": "^1.0.0",
-    "sass": "^1.71.1",
-    "typescript": "^5.2.2",
-    "vite": "^5.1.4",
-    "vite-plugin-dts": "^3.7.3"
+    "@rollup/plugin-replace": "^6.0.2",
+    "@zooizooi/eslint-config": "^1.1.15",
+    "sass": "^1.84.0",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vite-plugin-dts": "^4.5.0"
   }
 }
