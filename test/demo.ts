@@ -27,6 +27,10 @@ consola.addCommand('speed', (value: number) => {
     }
 });
 
+for (let i = 0; i < 100; i++) {
+    consola.showMessage(`Message ${i}`);
+}
+
 /**
  * Commands
  * https://www.mohaaaa.co.uk/AAAAMOHAA/content/cvars-commands-list
