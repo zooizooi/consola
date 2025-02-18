@@ -40,12 +40,12 @@ const template = `
 const MARGIN: number = 25;
 
 interface References {
-    [ref: string]: any
+    [ref: string]: any;
 }
 
 interface Command {
-    type: string,
-    value: number | undefined
+    type: string;
+    value: number | undefined;
 }
 
 export default class Window extends EventDispatcher {
@@ -72,7 +72,11 @@ export default class Window extends EventDispatcher {
     }
 
     public toggle() {
-        this.isVisible ? this.hide() : this.show();
+        if (this.isVisible) {
+            this.hide();
+        } else {
+            this.show();
+        }
     }
 
     public show() {
@@ -87,7 +91,11 @@ export default class Window extends EventDispatcher {
     }
 
     public toggleMinimize() {
-        this.isMinimized ? this.maximize() : this.minimize();
+        if (this.isMinimized) {
+            this.maximize();
+        } else {
+            this.minimize();
+        }
     }
 
     public minimize() {
