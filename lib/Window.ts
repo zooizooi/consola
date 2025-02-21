@@ -45,7 +45,7 @@ interface References {
 
 interface Command {
     type: string;
-    value: number | undefined;
+    value: number | string | undefined;
 }
 
 export default class Window extends EventDispatcher {
@@ -173,10 +173,11 @@ export default class Window extends EventDispatcher {
 
     private parseInput(input: string): Command {
         const split = input.split(' ');
-        return {
-            type: split[0],
-            value: Number(split[1]) ? Number(split[1]) : undefined,
-        };
+        const type = split[0];
+        const valueAsString = split[1];
+        const valueAsNumber = Number(valueAsString);
+        const value = isNaN(valueAsNumber) ? valueAsString : valueAsNumber;
+        return { type, value };
     }
 
     private executeCommand(command: Command): void {
