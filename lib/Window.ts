@@ -1,4 +1,4 @@
-import EventDispatcher from './EventDispatcher';
+import { EventDispatcher } from '@zooizooi/utils';
 import { traverseDOM } from './utils';
 
 const template = `
@@ -39,6 +39,10 @@ const template = `
 
 const MARGIN: number = 25;
 
+interface Props {
+    commands: Command[];
+}
+
 interface References {
     [ref: string]: any;
 }
@@ -57,11 +61,13 @@ export default class Window extends EventDispatcher {
     private buttonResizePosition: { x: number, y: number } = { x: 0, y: 0 };
     private isCustomSize = false;
     private isMinimized = false;
+    private commands: Command[] = [];
     private commandHistory: Command[] = [];
     private commandHistoryIndex = 0;
 
-    constructor() {
+    constructor(props: Props) {
         super();
+        this.commands = props.commands;
         this.window = this.parseTemplate(template);
         this.references = this.parseReferences(this.window);
         this.injectCss();
@@ -185,7 +191,7 @@ export default class Window extends EventDispatcher {
         let output = command.type;
         if (command.value) output += ` ${command.value}`;
         this.addOutput(output, true);
-        if (this.hasEvent(command.type)) {
+        if (this.commands.find(value => value.type === command.type)) {
             this.dispatchEvent(command.type, command.value);
         } else {
             this.addOutput(`Unknown command "${command.type}"`);

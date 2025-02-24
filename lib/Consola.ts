@@ -1,4 +1,4 @@
-import { Callback } from './EventDispatcher';
+import { Listener } from '@zooizooi/utils/modules/EventDispatcher';
 import Window from './Window';
 
 interface Command {
@@ -11,13 +11,13 @@ export default class Consola {
     private commands: Command[] = [];
 
     constructor() {
-        this.window = new Window();
+        this.window = new Window({ commands: this.commands });
         this.bindHandlers();
         this.setupEventListeners();
         this.addCoreCommands();
     }
 
-    public addCommand(type: string, descriptionOrCallback: string | Callback, callback?: Callback) {
+    public addCommand(type: string, descriptionOrCallback: string | Listener, callback?: Listener) {
         const command: Command = { type };
         if (typeof descriptionOrCallback === 'string') {
             if (callback) this.window.addEventListener(type, callback);
@@ -28,7 +28,7 @@ export default class Consola {
         this.commands.push(command);
     }
 
-    public removeCommand(type: string, callback: Callback) {
+    public removeCommand(type: string, callback: Listener) {
         this.window.removeEventListener(type, callback);
     }
 
