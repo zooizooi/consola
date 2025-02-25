@@ -1,7 +1,7 @@
 import { LocalStorage } from '@zooizooi/utils';
 
 export type CommandValue = number | string | boolean | undefined;
-export type CommandCallback = (value: CommandValue) => void;
+export type CommandCallback = (value: any) => void;
 
 interface Command {
     description?: string
