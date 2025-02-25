@@ -16,12 +16,12 @@
   "devDependencies": {
     "@rollup/plugin-replace": "^6.0.2",
     "@zooizooi/eslint-config": "^1.1.15",
-    "sass": "^1.84.0",
+    "sass": "^1.85.1",
     "typescript": "^5.7.3",
-    "vite": "^6.1.0",
+    "vite": "^6.2.0",
     "vite-plugin-dts": "^4.5.0"
   },
   "dependencies": {
-    "@zooizooi/utils": "^1.0.19"
+    "@zooizooi/utils": "^1.0.22"
   }
 }
