@@ -1,5 +1,5 @@
-import { EventDispatcher } from '@zooizooi/utils';
 import { traverseDOM } from './utils';
+import Commands from './Commands';
 
 const template = `
     <div class="consola-window">
@@ -37,22 +37,18 @@ const template = `
     </div>
 `;
 
-const MARGIN: number = 25;
-
-interface Props {
-    commands: Command[];
-}
+const MARGIN = 25;
 
 interface References {
     [ref: string]: any;
 }
 
-interface Command {
+interface Input {
     type: string;
-    value: number | string | undefined;
+    value: number | string | boolean | undefined;
 }
 
-export default class Window extends EventDispatcher {
+export default class Window {
     private references: References;
     private window: HTMLElement;
     private isVisible = false;
@@ -61,13 +57,9 @@ export default class Window extends EventDispatcher {
     private buttonResizePosition: { x: number, y: number } = { x: 0, y: 0 };
     private isCustomSize = false;
     private isMinimized = false;
-    private commands: Command[] = [];
-    private commandHistory: Command[] = [];
     private commandHistoryIndex = 0;
 
-    constructor(props: Props) {
-        super();
-        this.commands = props.commands;
+    constructor() {
         this.window = this.parseTemplate(template);
         this.references = this.parseReferences(this.window);
         this.injectCss();
@@ -177,7 +169,7 @@ export default class Window extends EventDispatcher {
         this.commandHistoryIndex = 0;
     }
 
-    private parseInput(input: string): Command {
+    private parseInput(input: string): Input {
         const split = input.split(' ');
         const type = split[0];
         const valueAsString = split[1];
@@ -186,35 +178,23 @@ export default class Window extends EventDispatcher {
         return { type, value };
     }
 
-    private executeCommand(command: Command): void {
-        this.commandHistory.push(command);
-        let output = command.type;
-        if (command.value) output += ` ${command.value}`;
-        this.addOutput(output, true);
-        if (this.commands.find(value => value.type === command.type)) {
-            this.dispatchEvent(command.type, command.value);
-        } else {
-            this.addOutput(`Unknown command "${command.type}"`);
-        }
+    private executeCommand(input: Input): void {
+        Commands.execute(input.type, input.value);
     }
 
     private showPreviousCommand(): void {
-        const previous = this.commandHistory[this.commandHistory.length - (this.commandHistoryIndex + 1)];
+        const previous = Commands.history[Commands.history.length - (this.commandHistoryIndex + 1)];
         if (previous) {
             this.commandHistoryIndex += 1;
-            let output = previous.type;
-            if (previous.value) output += ` ${previous.value}`;
-            this.addInput(output);
+            this.addInput(previous);
         }
     }
 
     private showNextCommand(): void {
-        const next = this.commandHistory[this.commandHistory.length - (this.commandHistoryIndex - 1)];
+        const next = Commands.history[Commands.history.length - (this.commandHistoryIndex - 1)];
         if (next) {
             this.commandHistoryIndex -= 1;
-            let output = next.type;
-            if (next.value) output += ` ${next.value}`;
-            this.addInput(output);
+            this.addInput(next);
         } else {
             this.clearInput();
         }

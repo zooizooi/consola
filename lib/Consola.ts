@@ -1,35 +1,28 @@
-import { Listener } from '@zooizooi/utils/modules/EventDispatcher';
 import Window from './Window';
-
-interface Command {
-    type: string,
-    description?: string
-}
+import Commands, { CommandCallback } from './Commands';
 
 export default class Consola {
     private window: Window;
-    private commands: Command[] = [];
 
     constructor() {
-        this.window = new Window({ commands: this.commands });
+        this.window = new Window();
         this.bindHandlers();
         this.setupEventListeners();
         this.addCoreCommands();
     }
 
-    public addCommand(type: string, descriptionOrCallback: string | Listener, callback?: Listener) {
-        const command: Command = { type };
+    public addCommand(type: string, descriptionOrCallback: string | CommandCallback, callback?: CommandCallback) {
         if (typeof descriptionOrCallback === 'string') {
-            if (callback) this.window.addEventListener(type, callback);
-            command.description = descriptionOrCallback;
+            if (callback) {
+                Commands.set(type, { description: descriptionOrCallback, callback });
+            }
         } else {
-            this.window.addEventListener(type, descriptionOrCallback);
+            Commands.set(type, { callback: descriptionOrCallback });
         }
-        this.commands.push(command);
     }
 
-    public removeCommand(type: string, callback: Listener) {
-        this.window.removeEventListener(type, callback);
+    public removeCommand(type: string) {
+        Commands.delete(type);
     }
 
     public showMessage(message: string) {
@@ -57,17 +50,18 @@ export default class Consola {
 
     private listCommands() {
         let commands = '';
-        const list = this.commands.sort((a, b) => {
-            if (a.type < b.type) {
+        const list = Array.from(Commands).sort((a, b) => {
+            if (a[0] < b[0]) {
                 return -1;
-            } else if (b.type > a.type) {
+            } else if (b[0] > a[0]) {
                 return 1;
             }
             return 0;
         });
         for (const command of list) {
-            let output = command.type;
-            if (command.description) output += `: ${command.description}`;
+            let output = command[0];
+            const description = command[1].description;
+            if (description) output += `: ${description}`;
             commands += `${output}<br>`;
         }
         this.window.showMessage(commands);
