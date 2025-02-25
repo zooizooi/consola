@@ -185,6 +185,7 @@ export default class Window {
     }
 
     private showPreviousCommand(): void {
+        if (!Commands.history) return;
         const previous = Commands.history[Commands.history.length - (this.commandHistoryIndex + 1)];
         if (previous) {
             this.commandHistoryIndex += 1;
@@ -193,6 +194,7 @@ export default class Window {
     }
 
     private showNextCommand(): void {
+        if (!Commands.history) return;
         const next = Commands.history[Commands.history.length - (this.commandHistoryIndex - 1)];
         if (next) {
             this.commandHistoryIndex -= 1;

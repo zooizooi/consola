@@ -1,3 +1,5 @@
+import { LocalStorage } from '@zooizooi/utils';
+
 export type CommandValue = number | string | boolean | undefined;
 export type CommandCallback = (value: CommandValue) => void;
 
@@ -6,8 +8,12 @@ interface Command {
     callback: CommandCallback;
 }
 
+const LOCAL_STORAGE_KEY = 'command-history';
+
 class Commands extends Map<string, Command> {
-    public history: string[] = [];
+    get history() {
+        return LocalStorage.get(LOCAL_STORAGE_KEY);
+    }
 
     public execute(type: string, value: CommandValue) {
         this.addToHistory(type, value);
@@ -20,9 +26,19 @@ class Commands extends Map<string, Command> {
     }
 
     private addToHistory(type: string, value: CommandValue) {
-        let historyValue = type;
-        if (value) historyValue += ` ${value}`;
-        this.history.push(historyValue);
+        if (!LocalStorage.get(LOCAL_STORAGE_KEY)) {
+            LocalStorage.set(LOCAL_STORAGE_KEY, []);
+        }
+
+        const history = LocalStorage.get(LOCAL_STORAGE_KEY);
+        if (history) {
+            let historyValue = type;
+            if (value) historyValue += ` ${value}`;
+            if (historyValue) {
+                history.push(historyValue);
+                LocalStorage.set(LOCAL_STORAGE_KEY, history);
+            }
+        }
     }
 }
 
