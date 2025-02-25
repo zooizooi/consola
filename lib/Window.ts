@@ -179,7 +179,9 @@ export default class Window {
     }
 
     private executeCommand(input: Input): void {
-        Commands.execute(input.type, input.value);
+        if (!Commands.execute(input.type, input.value)) {
+            this.addOutput(`Unknown command "${input.type}"`);
+        }
     }
 
     private showPreviousCommand(): void {
